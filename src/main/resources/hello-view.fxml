@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml" fx:controller="ma.enset.exam_mohammed_elbadry.presentation.controllers.MainController">
+    <children>
+        <TabPane>
+            <tabs>
+                <Tab text="Chercheurs">
+                    <content>
+                        <VBox spacing="10" padding="10">
+                            <children>
+                                <HBox spacing="10">
+                                    <children>
+                                        <Label text="Nom:"/>
+                                        <TextField fx:id="nomChercheurInput"/>
+                                        <Label text="Prenom:"/>
+                                        <TextField fx:id="prenomChercheurInput"/>
+                                    </children>
+                                </HBox>
+                                <HBox spacing="10">
+                                    <children>
+                                        <Label text="Email:"/>
+                                        <TextField fx:id="emailChercheurInput"/>
+                                        <Label text="Specialite:"/>
+                                        <TextField fx:id="specialiteChercheurInput"/>
+                                    </children>
+                                </HBox>
+                                <Button text="Add Chercheur" onAction="#onAddChercheur"/>
+                                <TableView fx:id="tableChercheurs">
+                                    <columns>
+                                        <TableColumn fx:id="colIdChercheur" text="ID"/>
+                                        <TableColumn fx:id="colNomChercheur" text="Nom"/>
+                                        <TableColumn fx:id="colPrenomChercheur" text="Prenom"/>
+                                        <TableColumn fx:id="colEmailChercheur" text="Email"/>
+                                        <TableColumn fx:id="colSpecialiteChercheur" text="Specialite"/>
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab text="Publications">
+                    <content>
+                        <VBox spacing="10" padding="10">
+                            <children>
+                                <HBox spacing="10">
+                                    <children>
+                                        <Label text="Titre:"/>
+                                        <TextField fx:id="titrePublicationInput"/>
+                                        <Label text="Date de Publication:"/>
+                                        <TextField fx:id="datePublicationInput"/>
+                                    </children>
+                                </HBox>
+                                <HBox spacing="10">
+                                    <children>
+                                        <Label text="Type:"/>
+                                        <TextField fx:id="typePublicationInput"/>
+                                        <Label text="DOI:"/>
+                                        <TextField fx:id="doiPublicationInput"/>
+                                    </children>
+                                </HBox>
+                                <Button text="Add Publication" onAction="#onAddPublication"/>
+                                <TableView fx:id="tablePublications">
+                                    <columns>
+                                        <TableColumn fx:id="colIdPublication" text="ID"/>
+                                        <TableColumn fx:id="colTitrePublication" text="Titre"/>
+                                        <TableColumn fx:id="colDatePublication" text="Date de Publication"/>
+                                        <TableColumn fx:id="colTypePublication" text="Type"/>
+                                        <TableColumn fx:id="colDoiPublication" text="DOI"/>
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</VBox>
