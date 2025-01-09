@@ -1,43 +1,48 @@
 package ma.enset.exam_mohammed_elbadry.metier;
 
+import ma.enset.exam_mohammed_elbadry.dao.beans.Chercheur;
+import ma.enset.exam_mohammed_elbadry.dao.beans.Publication;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class AppTest {
     public static void main(String[] args) {
+        ILaboratoireService laboratoireService = new LaboratoireServiceImpl();
 
+        // Add a new Chercheur
+        Chercheur chercheur = new Chercheur("John", "Doe", "john.doe@example.com", "Computer Science");
+        laboratoireService.addChercheur(chercheur);
+        System.out.println("Chercheur added: " + chercheur.getNom());
 
-        System.out.println("______________________________________");
+        // Update the Chercheur
+        chercheur.setNom("Jane");
+        laboratoireService.updateChercheur(chercheur);
+        System.out.println("Chercheur updated: " + chercheur.getNom());
 
-        // add new Entreprise
+        // List all Chercheurs
+        System.out.println("List of Chercheurs:");
+        laboratoireService.listChercheurs().forEach(c -> System.out.println(c.getId() + " - " + c.getNom() + " " + c.getPrenom()));
 
-//        Entreprise entreprise = new Entreprise();
-//        entreprise.setNom("Huawei");
-//        entreprise.setAdresse("china ");
-//        entreprise.setEmail("huawei@huawei.com");
-//        entreprise.setTelephone("7874637");
-//        Departement departement = new Departement();
-//        departement = metier.findDepartementById(1);
-//        metier.saveEntreprise(entreprise);
+        // Add a new Publication
+        Date datePublication;
+        try {
+            datePublication = new SimpleDateFormat("yyyy-MM-dd").parse("2023-10-01");
+        } catch (ParseException e) {
+            throw new RuntimeException("Invalid date format.");
+        }
+        Publication publication = new Publication("Research Paper", datePublication, "Article", "10.1000/xyz123", chercheur);
+        laboratoireService.addPublication(publication);
+        System.out.println("Publication added: " + publication.getTitre());
 
+        // Update the Publication
+        publication.setTitre("Updated Research Paper");
+        laboratoireService.updatePublication(publication);
+        System.out.println("Publication updated: " + publication.getTitre());
 
-        // add new Departement
-//        Departement departement = new Departement();
-//        departement.setNom("RH");
-//        departement.setEntreprise(metier.findEntrepriseById(1));
-//        metier.saveDepartement(departement);
-
-
-
-//        // add new Employe
-//
-//        Employe employe = new Employe();
-//        employe.setNom("Houssam");
-//        employe.setPoste("CEO");
-//        employe.setSalaire(32343.5);
-//        employe.setDepartement(metier.findDepartementById(1));
-//        metier.saveEmploye(employe);
-
-
-
-
-
+        // List all Publications
+        System.out.println("List of Publications:");
+        laboratoireService.listPublicationsByType("Article").forEach(p -> System.out.println(p.getId() + " - " + p.getTitre()));
     }
 }
