@@ -10,7 +10,10 @@
             <tabs>
                 <Tab text="Chercheurs">
                     <content>
-                        <VBox spacing="10" padding="10">
+                        <VBox spacing="10">
+                            <padding>
+                                <Insets top="10" right="10" bottom="10" left="10"/>
+                            </padding>
                             <children>
                                 <HBox spacing="10">
                                     <children>
@@ -44,7 +47,10 @@
                 </Tab>
                 <Tab text="Publications">
                     <content>
-                        <VBox spacing="10" padding="10">
+                        <VBox spacing="10">
+                            <padding>
+                                <Insets top="10" right="10" bottom="10" left="10"/>
+                            </padding>
                             <children>
                                 <HBox spacing="10">
                                     <children>

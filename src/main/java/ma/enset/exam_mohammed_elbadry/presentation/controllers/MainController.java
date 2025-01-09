@@ -1,186 +1,97 @@
-//package ma.enset.exam_mohammed_elbadry.presentation.controllers;
-//
-//import javafx.collections.FXCollections;
-//import javafx.collections.ObservableList;
-//import javafx.fxml.FXML;
-//import javafx.fxml.Initializable;
-//import javafx.scene.control.ComboBox;
-//import javafx.scene.control.TableColumn;
-//import javafx.scene.control.TableView;
-//import javafx.scene.control.TextField;
-//import javafx.scene.control.cell.PropertyValueFactory;
-//import ma.enset.exam_ahmed_houssam_bouzine.dao.beans.Departement;
-//import ma.enset.exam_ahmed_houssam_bouzine.dao.beans.Employe;
-//import ma.enset.exam_ahmed_houssam_bouzine.dao.beans.Entreprise;
-//import ma.enset.exam_ahmed_houssam_bouzine.metier.EntrepriseMetierImpl;
-//import ma.enset.exam_ahmed_houssam_bouzine.metier.IEntrepriseMetier;
-//
-//import java.net.URL;
-//import java.util.ResourceBundle;
-//
-//public class MainController implements Initializable {
-//    @FXML
-//    private TextField nomEntrepriseInput;
-//    @FXML
-//    private TextField adresseEntrepriseInput;
-//    @FXML
-//    private TextField telephoneEntrepriseInput;
-//    @FXML
-//    private TextField emailEntrepriseInput;
-//    @FXML
-//    private TableView<Entreprise> tableEntreprises;
-//
-//    @FXML
-//    private TableColumn<String,Entreprise> colNomEntreprise;
-//    @FXML
-//    private TableColumn<String,Entreprise> colAdresseEntreprise;
-//    @FXML
-//    private TableColumn<String,Entreprise> colTelephoneEntreprise;
-//    @FXML
-//    private TableColumn<String,Entreprise> colEmailEntreprise;
-//    @FXML
-//    private TextField searchEntrepriseInput;
-//
-//    @FXML
-//    private TextField nomDepartementInput;
-//    @FXML
-//    private TableView<Departement> tableDepartements;
-//
-//
-//    @FXML
-//    private TableColumn<String, Departement> colNomDepartement;
-//    @FXML
-//    private TableColumn<String,Departement> colEntrepriseDepartement;
-//
-//    @FXML
-//    private TextField searchDepartementInput;
-//
-//    @FXML
-//    private TextField nomEmployeInput;
-//    @FXML
-//    private TextField posteEmployeInput;
-//    @FXML
-//    private TextField salaireEmployeInput;
-//
-//    @FXML
-//    private TableView<Employe> tablesEmployes;
-//
-//    @FXML
-//    private TableColumn<String,Employe> colNomEmploye;
-//    @FXML
-//    private TableColumn<String,Employe> colPosteEmploye;
-//    @FXML
-//    private TableColumn<Double,Employe> colSalaireEmploye;
-//    @FXML
-//    private TableColumn<String,Employe> colDepartementEmploye;
-//    @FXML
-//    private TextField searchEmployeInput;
-//    @FXML
-//    private ComboBox<Entreprise> comboboxEntreprise;
-//    @FXML
-//    private ComboBox<Departement> comboboxDepartement;
-//
-//
-//    ObservableList<Entreprise> entreprises = FXCollections.observableArrayList();
-//    ObservableList<Employe> employees = FXCollections.observableArrayList();
-//    ObservableList<Departement> departements = FXCollections.observableArrayList();
-//    IEntrepriseMetier iEntrepriseMetier;
-//    @Override
-//    public void initialize(URL url, ResourceBundle resourceBundle) {
-//       iEntrepriseMetier = new EntrepriseMetierImpl();
-//       //Entreprise
-//        colNomEntreprise.setCellValueFactory(new PropertyValueFactory<>("nom"));
-//        colAdresseEntreprise.setCellValueFactory(new PropertyValueFactory<>("adresse"));
-//        colTelephoneEntreprise.setCellValueFactory(new PropertyValueFactory<>("telephone"));
-//        colEmailEntreprise.setCellValueFactory(new PropertyValueFactory<>("email"));
-//        entreprises.addAll(iEntrepriseMetier.findAllEntreprise());
-//        tableEntreprises.setItems(entreprises);
-//        loadEntreprises();
-//        searchEntrepriseInput.textProperty().addListener((observableValue, old, newVal) -> {
-//            entreprises.clear();
-//            entreprises.addAll(iEntrepriseMetier.getEntrepriseParMotCle(newVal));
-//        });
-//
-//        // Departement
-//        colNomDepartement.setCellValueFactory(new PropertyValueFactory<>("nom"));
-//        colEntrepriseDepartement.setCellValueFactory(new PropertyValueFactory<>("entreprise"));
-//        departements.addAll(iEntrepriseMetier.findAllDepartement());
-//        tableDepartements.setItems(departements);
-//        comboboxEntreprise.getItems().addAll(iEntrepriseMetier.findAllEntreprise());
-//        loadDepartements();
-//        // Employe
-//        colNomEmploye.setCellValueFactory(new PropertyValueFactory<>("nom"));
-//        colPosteEmploye.setCellValueFactory(new PropertyValueFactory<>("poste"));
-//        colSalaireEmploye.setCellValueFactory(new PropertyValueFactory<>("salaire"));
-//        colDepartementEmploye.setCellValueFactory(new PropertyValueFactory<>("departement"));
-//        employees.addAll(iEntrepriseMetier.findAllEmploye());
-//        comboboxDepartement.getItems().addAll(iEntrepriseMetier.findAllDepartement());
-//        tablesEmployes.setItems(employees);
-//        loadEmployees();
-//
-//    }
-//    private void loadEmployees(){
-//        employees.clear();
-//        employees.addAll(iEntrepriseMetier.findAllEmploye());
-//        tablesEmployes.setItems(employees);
-//    }
-//    private void loadEntreprises(){
-//        entreprises.clear();
-//        entreprises.addAll(iEntrepriseMetier.findAllEntreprise());
-//        tableEntreprises.setItems(entreprises);
-//    }
-//    private void loadDepartements(){
-//        departements.clear();
-//        departements.addAll(iEntrepriseMetier.findAllDepartement());
-//        tableDepartements.setItems(departements);
-//    }
-//    public void onAddEntreprise() {
-//        Entreprise entreprise = new Entreprise();
-//        entreprise.setNom(nomEntrepriseInput.getText());
-//        entreprise.setAdresse(adresseEntrepriseInput.getText());
-//        entreprise.setTelephone(telephoneEntrepriseInput.getText());
-//        entreprise.setEmail(emailEntrepriseInput.getText());
-//        iEntrepriseMetier.saveEntreprise(entreprise);
-//        nomEntrepriseInput.clear();
-//        adresseEntrepriseInput.clear();
-//        telephoneEntrepriseInput.clear();
-//        emailEntrepriseInput.clear();
-//        loadEntreprises();
-//    }
-//    public void onDeleteEntreprise(){
-//        Entreprise entreprise = tableEntreprises.getSelectionModel().getSelectedItem();
-//        iEntrepriseMetier.deleteEntreprise(entreprise.getId());
-//        loadEntreprises();
-//    }
-//    public void onAddDepartement() {
-//        Departement departement = new Departement();
-//        departement.setNom(nomDepartementInput.getText());
-//        Entreprise entreprise =  comboboxEntreprise.getSelectionModel().getSelectedItem();
-//        departement.setEntreprise(entreprise);
-//        iEntrepriseMetier.saveDepartement(departement);
-//        nomDepartementInput.clear();
-//        loadDepartements();
-//    }
-//    public void onDeleteDepartement(){
-//        Departement departement = tableDepartements.getSelectionModel().getSelectedItem();
-//        iEntrepriseMetier.deleteDepartement(departement.getId());
-//        loadDepartements();
-//    } public void onAddEmploye() {
-//        Employe employe = new Employe();
-//        employe.setNom(nomEmployeInput.getText());
-//        employe.setPoste(posteEmployeInput.getText());
-//        employe.setSalaire(Double.parseDouble(salaireEmployeInput.getText()));
-//        Departement departement =  comboboxDepartement.getSelectionModel().getSelectedItem();
-//        employe.setDepartement(departement);
-//        iEntrepriseMetier.saveDepartement(departement);
-//        nomEmployeInput.clear();
-//        posteEmployeInput.clear();
-//        salaireEmployeInput.clear();
-//        loadEmployees();
-//    }
-//    public void onDeleteEmploye(){
-//        Employe employe = tablesEmployes.getSelectionModel().getSelectedItem();
-//        iEntrepriseMetier.deleteEmploye(employe.getId());
-//        loadEmployees();
-//    }
-//}
+package ma.enset.exam_mohammed_elbadry.presentation.controllers;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import ma.enset.exam_mohammed_elbadry.dao.beans.Chercheur;
+import ma.enset.exam_mohammed_elbadry.dao.beans.Publication;
+import ma.enset.exam_mohammed_elbadry.metier.ILaboratoireService;
+import ma.enset.exam_mohammed_elbadry.metier.LaboratoireServiceImpl;
+
+import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.ResourceBundle;
+
+public class MainController implements Initializable {
+    @FXML
+    private TextField nomChercheurInput, prenomChercheurInput, emailChercheurInput, specialiteChercheurInput;
+    @FXML
+    private TableView<Chercheur> tableChercheurs;
+    @FXML
+    private TableColumn<Chercheur, Integer> colIdChercheur;
+    @FXML
+    private TableColumn<Chercheur, String> colNomChercheur, colPrenomChercheur, colEmailChercheur, colSpecialiteChercheur;
+
+    @FXML
+    private TextField titrePublicationInput, datePublicationInput, typePublicationInput, doiPublicationInput;
+    @FXML
+    private TableView<Publication> tablePublications;
+    @FXML
+    private TableColumn<Publication, Integer> colIdPublication;
+    @FXML
+    private TableColumn<Publication, String> colTitrePublication, colTypePublication, colDoiPublication;
+    @FXML
+    private TableColumn<Publication, Date> colDatePublication;
+
+    private ILaboratoireService laboratoireService = new LaboratoireServiceImpl();
+    private ObservableList<Chercheur> chercheurs = FXCollections.observableArrayList();
+    private ObservableList<Publication> publications = FXCollections.observableArrayList();
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Initialize Chercheur Table
+        colIdChercheur.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colNomChercheur.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        colPrenomChercheur.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        colEmailChercheur.setCellValueFactory(new PropertyValueFactory<>("email"));
+        colSpecialiteChercheur.setCellValueFactory(new PropertyValueFactory<>("specialite"));
+        tableChercheurs.setItems(chercheurs);
+        loadChercheurs();
+
+        // Initialize Publication Table
+        colIdPublication.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colTitrePublication.setCellValueFactory(new PropertyValueFactory<>("titre"));
+        colDatePublication.setCellValueFactory(new PropertyValueFactory<>("datePublication"));
+        colTypePublication.setCellValueFactory(new PropertyValueFactory<>("type"));
+        colDoiPublication.setCellValueFactory(new PropertyValueFactory<>("doi"));
+        tablePublications.setItems(publications);
+        loadPublications();
+    }
+
+    private void loadChercheurs() {
+        chercheurs.clear();
+        chercheurs.addAll(laboratoireService.listChercheurs());
+    }
+
+    private void loadPublications() {
+        publications.clear();
+        List<Publication> fetchedPublications = laboratoireService.listPublications();
+        System.out.println("Fetched Publications: " + fetchedPublications); // Debug statement
+        publications.addAll(fetchedPublications);
+    }
+
+    @FXML
+    private void onAddChercheur() {
+        Chercheur chercheur = new Chercheur(nomChercheurInput.getText(), prenomChercheurInput.getText(), emailChercheurInput.getText(), specialiteChercheurInput.getText());
+        laboratoireService.addChercheur(chercheur);
+        loadChercheurs();
+    }
+
+    @FXML
+    private void onAddPublication() {
+        try {
+            Date datePublication = new SimpleDateFormat("yyyy-MM-dd").parse(datePublicationInput.getText());
+            Publication publication = new Publication(titrePublicationInput.getText(), datePublication, typePublicationInput.getText(), doiPublicationInput.getText());
+            laboratoireService.addPublication(publication);
+            loadPublications();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+}

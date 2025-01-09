@@ -6,5 +6,6 @@ module org.main.ex {
 
     opens ma.enset.exam_mohammed_elbadry.presentation.views to javafx.graphics, javafx.fxml;
     opens ma.enset.exam_mohammed_elbadry.presentation.controllers to javafx.fxml;
+    opens ma.enset.exam_mohammed_elbadry.dao.beans to javafx.base;
     exports ma.enset.exam_mohammed_elbadry.presentation.views;
-}
+}a

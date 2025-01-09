@@ -1,4 +1,3 @@
-// File: src/main/java/ma/enset/exam_mohammed_elbadry/metier/AppTest.java
 package ma.enset.exam_mohammed_elbadry.metier;
 
 import ma.enset.exam_mohammed_elbadry.dao.beans.Chercheur;

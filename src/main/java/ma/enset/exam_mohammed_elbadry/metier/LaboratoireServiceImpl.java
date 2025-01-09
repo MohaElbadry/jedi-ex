@@ -58,6 +58,11 @@ public class LaboratoireServiceImpl implements ILaboratoireService {
     }
 
     @Override
+    public List<Publication> listPublications() {
+        return publicationDao.findAll();
+    }
+
+    @Override
     public List<Publication> listPublicationsByType(String type) {
         return publicationDao.findAll().stream()
                 .filter(p -> p.getType().equalsIgnoreCase(type))

@@ -27,6 +27,7 @@ public interface ILaboratoireService {
 
     void deletePublication(int id);
 
+    List<Publication> listPublications();
     List<Publication> listPublicationsByType(String type);
 
     List<Publication> searchPublicationByTitleOrDoi(String keyword);
