@@ -18,12 +18,6 @@ public class AppTest {
         laboratoireService.addChercheur(chercheur);
         System.out.println("Chercheur added: " + chercheur.getNom());
 
-        // Ensure the Chercheur ID is set
-        chercheur = laboratoireService.listChercheurs().stream()
-                .filter(c -> c.getEmail().equals("john.doe@example.com"))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Chercheur not found"));
-
         // Update the Chercheur
         chercheur.setNom("Jane");
         laboratoireService.updateChercheur(chercheur);
@@ -31,7 +25,7 @@ public class AppTest {
 
         // List all Chercheurs
         System.out.println("List of Chercheurs:");
-        laboratoireService.listChercheurs().forEach(c -> System.out.println(c.getId() + " - " + c.getNom() + " " + c.getPrenom()));
+        laboratoireService.listChercheurs().forEach(c -> System.out.println(c.getNom() + " " + c.getPrenom()));
 
         // Add a new Publication
         Date datePublication;
@@ -40,7 +34,7 @@ public class AppTest {
         } catch (ParseException e) {
             throw new RuntimeException("Invalid date format.");
         }
-        Publication publication = new Publication("Research Paper", datePublication, "Article", "10.1000/xyz123", chercheur);
+        Publication publication = new Publication("Research Paper", datePublication, "Article", "10.1000/xyz123");
         laboratoireService.addPublication(publication);
         System.out.println("Publication added: " + publication.getTitre());
 

@@ -27,10 +27,7 @@ public class PublicationDaoImpl implements PublicationDao {
                 publication.setDatePublication(resultSet.getDate("DATE_PUBLICATION"));
                 publication.setType(resultSet.getString("TYPE"));
                 publication.setDoi(resultSet.getString("DOI"));
-                // Assuming you have a method to find Chercheur by ID
-                ChercheurDao chercheurDao = new ChercheurDaoImpl();
-                Chercheur chercheur = chercheurDao.findById(resultSet.getInt("AUTEUR_PRINCIPAL_ID"));
-                publication.setAuteurPrincipal(chercheur);
+
                 publications.add(publication);
             }
             return publications;
@@ -56,7 +53,6 @@ public class PublicationDaoImpl implements PublicationDao {
             // Assuming you have a method to find Chercheur by ID
             ChercheurDao chercheurDao = new ChercheurDaoImpl();
             Chercheur chercheur = chercheurDao.findById(resultSet.getInt("AUTEUR_PRINCIPAL_ID"));
-            publication.setAuteurPrincipal(chercheur);
             return publication;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -67,12 +63,11 @@ public class PublicationDaoImpl implements PublicationDao {
     public void save(Publication publication) {
         try {
             Connection connection = SingletonConnexionDB.getConnection();
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO publication VALUES (null,?,?,?,?,?)");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO publication VALUES (null,?,?,?,?)");
             statement.setString(1, publication.getTitre());
             statement.setDate(2, new java.sql.Date(publication.getDatePublication().getTime()));
             statement.setString(3, publication.getType());
             statement.setString(4, publication.getDoi());
-            statement.setInt(5, publication.getAuteurPrincipal().getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -83,13 +78,11 @@ public class PublicationDaoImpl implements PublicationDao {
     public void update(Publication publication) {
         try {
             Connection connection = SingletonConnexionDB.getConnection();
-            PreparedStatement statement = connection.prepareStatement("UPDATE publication SET TITRE=?, DATE_PUBLICATION=?, TYPE=?, DOI=?, AUTEUR_PRINCIPAL_ID=? WHERE ID=?");
+            PreparedStatement statement = connection.prepareStatement("UPDATE publication SET TITRE=?,  TYPE=?, DOI=? WHERE ID=?");
             statement.setString(1, publication.getTitre());
-            statement.setDate(2, new java.sql.Date(publication.getDatePublication().getTime()));
-            statement.setString(3, publication.getType());
-            statement.setString(4, publication.getDoi());
-            statement.setInt(5, publication.getAuteurPrincipal().getId());
-            statement.setInt(6, publication.getId());
+            statement.setString(2, publication.getType());
+            statement.setString(3, publication.getDoi());
+            statement.setInt(4, publication.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -160,7 +160,7 @@ public class MenuTest {
             System.out.println("Chercheur not found.");
             return;
         }
-        Publication publication = new Publication(titre, datePublication, type, doi, auteurPrincipal);
+        Publication publication = new Publication(titre, datePublication, type, doi);
         laboratoireService.addPublication(publication);
         System.out.println("Publication added successfully.");
     }
@@ -202,7 +202,6 @@ public class MenuTest {
             System.out.println("Chercheur not found.");
             return;
         }
-        publication.setAuteurPrincipal(auteurPrincipal);
         laboratoireService.updatePublication(publication);
         System.out.println("Publication updated successfully.");
     }

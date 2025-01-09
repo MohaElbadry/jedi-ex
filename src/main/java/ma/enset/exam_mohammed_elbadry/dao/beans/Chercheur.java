@@ -1,12 +1,12 @@
+// File: src/main/java/ma/enset/exam_mohammed_elbadry/dao/beans/Chercheur.java
 package ma.enset.exam_mohammed_elbadry.dao.beans;
+
 public class Chercheur {
     private int id;
     private String nom;
     private String prenom;
     private String email;
     private String specialite;
-
-    // Getters and Setters
 
     public Chercheur(String nom, String prenom, String email, String specialite) {
         this.nom = nom;
@@ -16,6 +16,14 @@ public class Chercheur {
     }
 
     public Chercheur() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setNom(String nom) {
@@ -34,10 +42,6 @@ public class Chercheur {
         this.specialite = specialite;
     }
 
-    public int getId() {
-        return id;
-    }
-
     public String getNom() {
         return nom;
     }
@@ -52,8 +56,5 @@ public class Chercheur {
 
     public String getSpecialite() {
         return specialite;
-    }
-
-    public void setId(int id) {
     }
 }

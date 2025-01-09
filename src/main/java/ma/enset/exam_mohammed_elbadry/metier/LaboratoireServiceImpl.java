@@ -73,10 +73,10 @@ public class LaboratoireServiceImpl implements ILaboratoireService {
 
     @Override
     public List<Publication> listPublicationsByChercheur(int chercheurId) {
-        return publicationDao.findAll().stream()
-                .filter(p -> p.getAuteurPrincipal().getId() == chercheurId)
-                .collect(Collectors.toList());
+        return List.of();
     }
+
+
     @Override
     public void addChercheurPublication(ChercheurPublication chercheurPublication) {
         chercheurPublicationDao.save(chercheurPublication);

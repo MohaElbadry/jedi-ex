@@ -1,3 +1,4 @@
+// File: src/main/java/ma/enset/exam_mohammed_elbadry/dao/beans/Publication.java
 package ma.enset.exam_mohammed_elbadry.dao.beans;
 
 import java.util.Date;
@@ -8,18 +9,15 @@ public class Publication {
     private Date datePublication;
     private String type;
     private String doi;
-    private Chercheur auteurPrincipal;
 
-    public Publication(String titre, Date datePublication, String type, String doi, Chercheur auteurPrincipal) {
+    public Publication(String titre, Date datePublication, String type, String doi) {
         this.titre = titre;
         this.datePublication = datePublication;
         this.type = type;
         this.doi = doi;
-        this.auteurPrincipal = auteurPrincipal;
     }
 
     public Publication() {
-
     }
 
     public int getId() {
@@ -60,13 +58,5 @@ public class Publication {
 
     public void setDoi(String doi) {
         this.doi = doi;
-    }
-
-    public Chercheur getAuteurPrincipal() {
-        return auteurPrincipal;
-    }
-
-    public void setAuteurPrincipal(Chercheur auteurPrincipal) {
-        this.auteurPrincipal = auteurPrincipal;
     }
 }
