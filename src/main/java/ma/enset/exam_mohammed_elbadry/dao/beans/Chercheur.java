@@ -53,4 +53,7 @@ public class Chercheur {
     public String getSpecialite() {
         return specialite;
     }
+
+    public void setId(int id) {
+    }
 }

@@ -1,11 +1,9 @@
 // File: src/main/java/ma/enset/exam_mohammed_elbadry/service/LaboratoireServiceImpl.java
 package ma.enset.exam_mohammed_elbadry.metier;
 
-import ma.enset.exam_mohammed_elbadry.dao.ChercheurDao;
-import ma.enset.exam_mohammed_elbadry.dao.ChercheurDaoImpl;
-import ma.enset.exam_mohammed_elbadry.dao.PublicationDao;
-import ma.enset.exam_mohammed_elbadry.dao.PublicationDaoImpl;
+import ma.enset.exam_mohammed_elbadry.dao.*;
 import ma.enset.exam_mohammed_elbadry.dao.beans.Chercheur;
+import ma.enset.exam_mohammed_elbadry.dao.beans.ChercheurPublication;
 import ma.enset.exam_mohammed_elbadry.dao.beans.Publication;
 import ma.enset.exam_mohammed_elbadry.metier.ILaboratoireService;
 
@@ -15,6 +13,7 @@ import java.util.stream.Collectors;
 public class LaboratoireServiceImpl implements ILaboratoireService {
     private ChercheurDao chercheurDao = new ChercheurDaoImpl();
     private PublicationDao publicationDao = new PublicationDaoImpl();
+    private ChercheurPublicationDao chercheurPublicationDao = new ChercheurPublicationDaoImpl();
 
     @Override
     public void addChercheur(Chercheur chercheur) {
@@ -77,5 +76,14 @@ public class LaboratoireServiceImpl implements ILaboratoireService {
         return publicationDao.findAll().stream()
                 .filter(p -> p.getAuteurPrincipal().getId() == chercheurId)
                 .collect(Collectors.toList());
+    }
+    @Override
+    public void addChercheurPublication(ChercheurPublication chercheurPublication) {
+        chercheurPublicationDao.save(chercheurPublication);
+    }
+
+    @Override
+    public List<ChercheurPublication> listChercheurPublications() {
+        return chercheurPublicationDao.findAll();
     }
 }

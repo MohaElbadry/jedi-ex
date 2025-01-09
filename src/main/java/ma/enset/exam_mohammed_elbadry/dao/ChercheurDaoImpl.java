@@ -1,3 +1,4 @@
+// File: src/main/java/ma/enset/exam_mohammed_elbadry/dao/ChercheurDaoImpl.java
 package ma.enset.exam_mohammed_elbadry.dao;
 
 import ma.enset.exam_mohammed_elbadry.dao.beans.Chercheur;
@@ -20,6 +21,7 @@ public class ChercheurDaoImpl implements ChercheurDao {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Chercheur chercheur = new Chercheur();
+                chercheur.setId(resultSet.getInt("ID"));
                 chercheur.setNom(resultSet.getString("NOM"));
                 chercheur.setPrenom(resultSet.getString("PRENOM"));
                 chercheur.setEmail(resultSet.getString("EMAIL"));
@@ -41,6 +43,7 @@ public class ChercheurDaoImpl implements ChercheurDao {
             ResultSet resultSet = statement.executeQuery();
             if (!resultSet.next()) return null;
             Chercheur chercheur = new Chercheur();
+            chercheur.setId(resultSet.getInt("ID"));
             chercheur.setNom(resultSet.getString("NOM"));
             chercheur.setPrenom(resultSet.getString("PRENOM"));
             chercheur.setEmail(resultSet.getString("EMAIL"));
@@ -55,12 +58,16 @@ public class ChercheurDaoImpl implements ChercheurDao {
     public void save(Chercheur chercheur) {
         try {
             Connection connection = SingletonConnexionDB.getConnection();
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO chercheur VALUES (null,?,?,?,?)");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO chercheur (NOM, PRENOM, EMAIL, SPECIALITE) VALUES (?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setString(1, chercheur.getNom());
             statement.setString(2, chercheur.getPrenom());
             statement.setString(3, chercheur.getEmail());
             statement.setString(4, chercheur.getSpecialite());
             statement.executeUpdate();
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                chercheur.setId(generatedKeys.getInt(1));
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

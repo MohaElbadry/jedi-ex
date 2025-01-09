@@ -1,6 +1,8 @@
+// File: src/main/java/ma/enset/exam_mohammed_elbadry/metier/AppTest.java
 package ma.enset.exam_mohammed_elbadry.metier;
 
 import ma.enset.exam_mohammed_elbadry.dao.beans.Chercheur;
+import ma.enset.exam_mohammed_elbadry.dao.beans.ChercheurPublication;
 import ma.enset.exam_mohammed_elbadry.dao.beans.Publication;
 
 import java.text.ParseException;
@@ -15,6 +17,12 @@ public class AppTest {
         Chercheur chercheur = new Chercheur("John", "Doe", "john.doe@example.com", "Computer Science");
         laboratoireService.addChercheur(chercheur);
         System.out.println("Chercheur added: " + chercheur.getNom());
+
+        // Ensure the Chercheur ID is set
+        chercheur = laboratoireService.listChercheurs().stream()
+                .filter(c -> c.getEmail().equals("john.doe@example.com"))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Chercheur not found"));
 
         // Update the Chercheur
         chercheur.setNom("Jane");
@@ -44,5 +52,14 @@ public class AppTest {
         // List all Publications
         System.out.println("List of Publications:");
         laboratoireService.listPublicationsByType("Article").forEach(p -> System.out.println(p.getId() + " - " + p.getTitre()));
+
+        // Add ChercheurPublication (many-to-many relationship)
+        ChercheurPublication chercheurPublication = new ChercheurPublication(chercheur.getId(), publication.getId());
+        laboratoireService.addChercheurPublication(chercheurPublication);
+        System.out.println("ChercheurPublication added: Chercheur ID = " + chercheurPublication.getChercheurId() + ", Publication ID = " + chercheurPublication.getPublicationId());
+
+        // List all ChercheurPublications
+        System.out.println("List of ChercheurPublications:");
+        laboratoireService.listChercheurPublications().forEach(cp -> System.out.println("Chercheur ID = " + cp.getChercheurId() + ", Publication ID = " + cp.getPublicationId()));
     }
 }

@@ -1,6 +1,7 @@
 package ma.enset.exam_mohammed_elbadry.metier;
 
 import ma.enset.exam_mohammed_elbadry.dao.beans.Chercheur;
+import ma.enset.exam_mohammed_elbadry.dao.beans.ChercheurPublication;
 import ma.enset.exam_mohammed_elbadry.dao.beans.Publication;
 
 import java.util.List;
@@ -32,5 +33,9 @@ public interface ILaboratoireService {
 
     List<Publication> listPublicationsByChercheur(int chercheurId);
 
+    // ChercheurPublication
+    void addChercheurPublication(ChercheurPublication chercheurPublication);
+
+    List<ChercheurPublication> listChercheurPublications();
 
 }
